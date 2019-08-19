@@ -13,7 +13,7 @@ export default function LandingPage(props) {
         <p className="landingLogo">
           
         </p>
-        <h2>Welcome to the Emoji Spaced Repetition App</h2>
+        <h2>Welcome to the Stock Port App</h2>
         <p>
           This app will help you to communicate quickly and effortlessly, even
           across language barriers!
