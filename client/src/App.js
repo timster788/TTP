@@ -4,6 +4,7 @@ import './index.css';
 import LandingPage from './components/landing-page';
 import LoginPage from './components/login-page';
 import RegistrationPage from './components/registration-page';
+import Portfolio from './components/portfolio'
 
 
 import { connect } from 'react-redux';
@@ -49,6 +50,7 @@ export class App extends React.Component {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={RegistrationPage} />
+        <Route exact path="/portfolio" component={Portfolio} />
       </div>
     );
   }

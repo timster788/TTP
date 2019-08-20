@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import HeaderBar from './header-bar';
+import { Link } from 'react-router-dom';
 
 
 export class Dashboard extends React.Component {
@@ -17,7 +18,9 @@ export class Dashboard extends React.Component {
     return (
       <div>
         <HeaderBar />
-        
+        <Link to="/portfolio">
+          <button className="landing button">portfolio</button>
+        </Link>
       </div>
     );
   }
