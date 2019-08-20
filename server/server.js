@@ -11,6 +11,7 @@ const jwtStrategy = require('./passport/jwt');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const portfolioRouter = require('./routes/portfolios');
+const transactionRouter = require('./routes/transactions');
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 const jwtAuth = passport.authenticate('jwt', {
@@ -31,6 +32,7 @@ app.use(express.json());
 
 app.use('/api/users', userRouter);
 app.use('/api/portfolio', jwtAuth, portfolioRouter);
+app.use('/api/transactions', jwtAuth, transactionRouter);
 app.use('/api', authRouter);
 app.use(
   cors({

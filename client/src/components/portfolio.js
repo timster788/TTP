@@ -32,7 +32,7 @@ import  {getPortfolio}  from '../actions/portfolio'
                    <li>Stock</li>
                    <li>Shares</li>
               </div>
-              {/* <BuyForm userBalance={balance} /> */}
+              <BuyForm  />
             </div>
           </div>
         );
