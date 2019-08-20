@@ -7,6 +7,7 @@ import protectedDataReducer from './reducers/protected-data';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
 import portfolioReducer from './reducers/portfolio-reducer'
 import stockReducer from './reducers/stock-reducer'
+import transactionReducer from './reducers/transaction-reducer'
 
 const store = createStore(
   combineReducers({
@@ -14,7 +15,8 @@ const store = createStore(
     auth: authReducer,
     protectedData: protectedDataReducer,
     portfolio : portfolioReducer,
-    stock : stockReducer
+    stock : stockReducer,
+    transaction : transactionReducer
   }),
   applyMiddleware(thunk)
 );
