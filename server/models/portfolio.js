@@ -9,7 +9,7 @@ const portfolioSchema = new mongoose.Schema({
     required: true,
     default: 5000
   },
-  userId: { type: String, ref: 'User', required: true }
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 portfolioSchema.set('timestamps', true);

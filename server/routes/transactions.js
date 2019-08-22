@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-
+const mongoose = require('mongoose');
 const Transaction = require('../models/transaction');
 
 const router = express.Router();
@@ -8,28 +8,30 @@ const router = express.Router();
 router.use(
   passport.authenticate('jwt', { session: false, failWithError: true })
 );
-router.post('/:id', (req, res, next) => {
-  const id = req.params.id;
-  const { stock, shares, quantity } = req.body;
+router.post('/', (req, res, next) => {
+  const userId = req.user._id;
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    const err = new Error('The `userId` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+  const { symbol, quantity } = req.body;
   const newTransaction = {
-    stock,
-    shares,
+    symbol,
     quantity,
-
-    userId: id
+    userId
   };
   Transaction.create(newTransaction)
     .then(result => {
+      console.log('result', result);
+
       res
+
         .location(`${req.originalUrl}/${result.id}`)
         .status(201)
         .json(result);
     })
     .catch(err => {
-      if (err.code === 11000) {
-        err = new Error('This transaction already exists');
-        err.status = 400;
-      }
       next(err);
     });
 });

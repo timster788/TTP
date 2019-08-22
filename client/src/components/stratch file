@@ -1,0 +1,134 @@
+// class BuyForm extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       symbol: '',
+//       quantity: 0,
+      
+//     };
+//     // this.handleChange = this.handleChange.bind(this);
+//     // this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+//   componentDidMount(){
+//     this.props.dispatch(fetchStockData(this.props.symbol));
+    
+//   }
+
+//   handleChange = event => {
+//     this.setState({ [event.target.name]: event.target.value  });
+//   };
+
+//   handleSubmit(event) {
+//     const symbol = this.state.symbol;
+//     const quantity = this.state.quantity;
+//     event.preventDefault();
+//     this.props.addStockTransaction(symbol, quantity);
+//     this.setState({ ticker: '', quantity: 0 });
+//   }
+
+
+
+//   render() {
+//     //   if(!this.props.symbol){
+//     //     return (
+//     //         <section className="loading-page">
+//     //           <p>Loading...</p>
+//     //         </section>
+//     //       );
+//     //   }
+    
+//     // const transactionList = (
+//     //     <button className="added-to-stock-transaction" onClick={() => this.addStockTransaction()}>
+//     //       Add To transaction
+//     //     </button>)
+//     return (
+//       <div className="buyForm">
+//         <h3>Balance: 50000</h3>
+//         <form onSubmit={this.handleSubmit} className="formBody">
+//           <div className="formItem">
+//             <label className="font">symbol</label>
+//             <input
+//               type="text"
+//               name="symbol"
+//               value={this.state.symbol}
+//              onChange={this.handleChange}
+//             />
+            
+//           </div>
+//           <div className="formItem">
+//             <label className="font">Qty</label>
+//             <input
+//               type="number"
+//               name="quantity"
+//               placeholder=""
+//               value={this.state.quantity}
+//               onChange={this.handleChange}
+//             />
+//           </div>
+//            <button className="formItem" type="submit">
+//             BUY
+//           </button>
+          
+//           {/* {transactionList} */}
+//         </form>
+//       </div>
+//     );
+  
+
+//   }
+// }
+
+
+// const mapDispatch = dispatch =>{
+    
+//     // const symbol = props.match.params.symbol
+//     return {
+        
+    
+//         addStockTransaction: (symbol, quantity) =>
+//         dispatch(addStockTransaction(symbol, quantity)),
+      
+//     };
+//   };
+
+// export default connect(
+//     mapDispatch
+  
+// )(BuyForm);
+
+
+// symbol: state.symbol,
+// //  shares: state.symbol.shares,
+//  quantity: state.quantity,
+//  currentUser: state.auth.currentUser,
+  
+
+
+//   addStockTransaction() {
+//     let obj = {
+//       symbol: this.props.symbol,
+      
+//       quantity: this.props.quantity
+     
+    
+//     };
+//     let userId = this.props.currentUser.id;
+//     this.props.dispatch(addStockTransaction(obj, userId));
+    
+//   }
+
+//   handleChange(event) {
+//     this.setState({ [event.target.name]: event.target.value });
+//   }
+
+// handleSubmit = e => {
+//     e.preventDefault();
+
+//     this.props.onSubmit(value)
+//     }
+
+//     event.preventDefault();
+//     this.props.createBuyStocks(symbol, quantity);
+//     this.setState({ symbol: '', quantity: 0 });
+//     console.log(symbol)
+//   }

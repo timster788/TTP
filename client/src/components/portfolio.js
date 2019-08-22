@@ -1,24 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
-import BuyForm from './buy-form';
+// import BuyForm from './buy-form'
+import AddTransactionWrapper from './add-transaction-wrapper';
 import PositionCard from './position-card'
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login'
 import  {getPortfolio}  from '../actions/portfolio'
+import buyForm from './buy-form';
  class Portfolio extends React.Component {
 
     componentDidMount() {
-        let id = this.props.user.id;
-        console.log(getPortfolio)
-        this.props.dispatch(getPortfolio(id));
+        // let id = this.props.user.id;
+        
+        
         
       }
+
+      
+    
       render() {
         // const { positions, balance } = this.props;
         // let totalPortfolioValue = 0;
         // positions.map(position => (totalPortfolioValue += position.totalStockVal));
-    
+       
         return (
           <div className="portfolio_wrapper">
             <h1>Your Portfolio</h1>
@@ -32,8 +36,7 @@ import  {getPortfolio}  from '../actions/portfolio'
                    <li>Stock</li>
                    <li>Shares</li>
               </div>
-              <BuyForm  />
-            </div>
+<AddTransactionWrapper></AddTransactionWrapper>            </div>
           </div>
         );
       }

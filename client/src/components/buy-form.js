@@ -2,92 +2,72 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetchStockData} from '../actions/stock'
 // import { createBuyStocks } from '../store';
+import {addStockTransaction} from '../actions/transaction'
+import { Field, reduxForm } from 'redux-form'
 
-class BuyForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      symbol: '',
-      quantity: 0,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  componentDidMount(){
-    this.props.dispatch(fetchStockData(this.props.symbol));
-  }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
 
-  handleSubmit(event) {
-    const symbol = this.state.symbol;
-    const quantity = this.state.quantity;
-    event.preventDefault();
-    this.props.createBuyStocks(symbol, quantity);
-    this.setState({ symbol: '', quantity: 0 });
-    console.log(symbol)
-  }
 
-  render() {
-    //   if(!this.props.symbol){
-    //     return (
-    //         <section className="loading-page">
-    //           <p>Loading...</p>
-    //         </section>
-    //       );
-    //   }
-    const {  buyError } = this.props;
-
-    return (
-      <div className="buyForm">
-        <h3>Balance: 50000</h3>
-        <form onSubmit={this.handleSubmit} className="formBody">
-          <div className="formItem">
-            <label className="font">symbol</label>
-            <input
-              type="text"
-              name="symbol"
-              value={this.state.symbol}
+class BuyForm extends  React.Component {
+    handleSubmit = values => {
+        console.log('values', values);
+        const {
+          symbol,
+          quantity,
+        
+        } = values;
+   
+    //    const userId = this.props.auth.currentUser
+    
+        const data = {
+          
+        //   userId:userId,
+          symbol:symbol,
+          quantity:quantity
+        };
+        console.log('why is this undefined', data);
+        return this.props.dispatch(addStockTransaction(data));
+    }
+    render() {
+       
+        const { handleSubmit } = this.props;
+        return (
+          <form onSubmit={handleSubmit(this.handleSubmit)}>
+           
+            <div>
+              <label>Symbol</label>
+              <div>
+                <Field
+                  name="symbol"
+                  component="input"
+                  type="text"
+                  placeholder="Stock Symbol"
+                />
+              </div>
+              <label>Quantity</label>
+              <div>
+                <Field
+                  name="quantity"
+                  component="input"
+                  type="number"
+                  placeholder="quantity"
+                />
+              </div>
              
-              
-              onChange={this.handleChange}
+            </div>
+            <button
+              name="submit"
+              type="button"
+              onClick={handleSubmit(this.handleSubmit)}
             />
-            
-          </div>
-          <div className="formItem">
-            <label className="font">Qty</label>
-            <input
-              type="number"
-              name="quantity"
-              placeholder=""
-              value={this.state.quantity}
-              onChange={this.handleChange}
-            />
-          </div>
-          <button className="formItem" type="submit">
-            BUY
-          </button>
-          {buyError ? <p className="ERROR font">{buyError}</p> : null}
-        </form>
-      </div>
-    );
-  
+            <div />
+          </form>
+        );
+    }
 
-  }
 }
 
 
-const mapStateToProps = (state, props) => {
-    
-    return {
-      symbol: state.stock.symbol
-      
-    };
-  };
+export default reduxForm({ form: 'BuyForm' })(BuyForm);
 
-export default connect(
-  mapStateToProps,
   
-)(BuyForm);

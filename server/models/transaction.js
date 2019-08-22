@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-  stock: { type: String },
+  symbol: { type: String },
   shares: { type: Number },
   quantity: { type: Number },
-  balance: { type: Number, ref: 'Portfolio' },
-  userId: { type: String, ref: 'User', required: true }
+  balance: { type: mongoose.Schema.Types.ObjectId, ref: 'Portfolio' },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 transactionSchema.set('timestamps', true);

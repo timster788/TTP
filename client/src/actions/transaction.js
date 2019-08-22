@@ -1,16 +1,17 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
-export const addStockTransaction = (obj, userId) => (dispatch, getState) => {
+export const addStockTransaction = (data) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  dispatch(addStockTransaction());
-  return fetch(`${API_BASE_URL}/transaction/${userId}`, {
+  dispatch(addStockTransactionRequest());
+  return fetch(`${API_BASE_URL}/transactions/`, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json',
-      Authorization: `Bearer ${authToken}`
+        Authorization: `Bearer ${authToken}`,
+      'content-type': 'application/json'
+      
     },
-    body: JSON.stringify(obj)
+    body: JSON.stringify(data)
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())

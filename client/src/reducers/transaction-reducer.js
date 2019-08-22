@@ -7,23 +7,29 @@ import {
     GET_TRANSACTION_LIST_ERROR
   } from '../actions/transaction';
   const initialState = {
-    transactoinList: [],
-    loading: false,
-    error: null
+//    userId:null,
+   symbol:null,
+   quantity:null
   };
   
   export default function reducer(state = initialState, action) {
+    
     if (action.type === ADD_STOCK_TRANSACTION_REQUEST) {
-      return Object.assign({}, state, {
-        loading: true,
-        error: null
-      });
+      return {
+          ...state,
+        //   userId:action.currentUser,
+          symbol:null,
+          quantity:null
+      };
     }
   
     if (action.type === ADD_STOCK_TRANSACTION_SUCCESS) {
-      return Object.assign({}, state, {
-        loading: false
-      });
+        return {
+            ...state,
+            // userId:action.currentUser,
+            symbol:action.response.symbol,
+            quantity:action.response.quantity
+        };
     }
   
     if (action.type === ADD_STOCK_TRANSACTION_ERROR) {
