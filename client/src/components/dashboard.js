@@ -21,6 +21,9 @@ export class Dashboard extends React.Component {
         <Link to="/portfolio">
           <button className="landing button">portfolio</button>
         </Link>
+        <Link to="/transactions">
+          <button className="landing button">transactions</button>
+        </Link>
       </div>
     );
   }

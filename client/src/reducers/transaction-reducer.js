@@ -41,15 +41,15 @@ import {
   
     if (action.type === GET_TRANSACTION_LIST_REQUEST) {
       return Object.assign({}, state, {
-        loading: true,
-        error: null
+        symbol:null,
+          quantity:null
       });
     }
   
     if (action.type === GET_TRANSACTION_LIST_SUCCESS) {
       return Object.assign({}, state, {
-        loading: false,
-        watchList: action.watchList
+        symbol:action.response.symbol,
+            quantity:action.response.quantity
       });
     }
   

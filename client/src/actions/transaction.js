@@ -35,10 +35,10 @@ export const addStockTransactionError = error => ({
   error
 });
 
-export const getTransactionList = id => (dispatch, getState) => {
+export const getTransactionList = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     dispatch(getTransactionListRequest());
-    return fetch(`${API_BASE_URL}/transaction/${id}`, {
+    return fetch(`${API_BASE_URL}/transactions/`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
