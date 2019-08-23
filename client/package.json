@@ -11,7 +11,8 @@
     "react-scripts": "^3.1.1",
     "redux": "^4.0.4",
     "redux-form": "^8.2.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.87.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,7 +36,9 @@
     ]
   },
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  },
   "author": "Timothy Dao",
   "license": "ISC",
   "description": ""

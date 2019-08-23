@@ -5,18 +5,19 @@ import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import protectedDataReducer from './reducers/protected-data';
 import { setAuthToken, refreshAuthToken } from './actions/auth';
-import portfolioReducer from './reducers/portfolio-reducer'
-import stockReducer from './reducers/stock-reducer'
-import transactionReducer from './reducers/transaction-reducer'
+import portfolioReducer from './reducers/portfolio-reducer';
+import stockReducer from './reducers/stock-reducer';
+import transactionReducer from './reducers/transaction-reducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
   combineReducers({
     form: formReducer,
     auth: authReducer,
     protectedData: protectedDataReducer,
-    portfolio : portfolioReducer,
-    stock : stockReducer,
-    transaction : transactionReducer
+    portfolio: portfolioReducer,
+    stock: stockReducer,
+    transaction: transactionReducer
   }),
   applyMiddleware(thunk)
 );

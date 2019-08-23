@@ -4,8 +4,8 @@ import './index.css';
 import LandingPage from './components/landing-page';
 import LoginPage from './components/login-page';
 import RegistrationPage from './components/registration-page';
-import Portfolio from './components/portfolio'
-import Transaction from './components/transaction-page'
+import Portfolio from './components/portfolio';
+import TransactionWrapper from './components/transaction-wrapper';
 
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
@@ -51,7 +51,7 @@ export class App extends React.Component {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/portfolio" component={Portfolio} />
-        <Route exact path ="/transactions"component={Transaction}/>
+        <Route exact path="/transactions" component={TransactionWrapper} />
       </div>
     );
   }
