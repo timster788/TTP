@@ -10,7 +10,6 @@ import stockReducer from './reducers/stock-reducer';
 import transactionReducer from './reducers/transaction-reducer';
 import tradeReducer from './actions/trade'
 import holdingReducer from './actions/holding'
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
   combineReducers({
