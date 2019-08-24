@@ -75,13 +75,20 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-if(process.env.NODE_ENV='production'){
-  app.use(express.static('client/build'))
-  
-app.get('*',(req,res)=>  {
-  res.sendFile(path.join(__dirname, 'client','build','index.html'));
-})
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  //
+  app.get('*', (req, res) => {
+    res.sendfile(path.join(__dirname = 'client/build/index.html'));
+  })
 }
+//build mode
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+})
+
 // function runServer(port = PORT) {
 //   const server = app
 //     .listen(port, () => {
