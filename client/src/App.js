@@ -5,7 +5,7 @@ import LandingPage from './components/landing-page';
 import LoginPage from './components/login-page';
 import RegistrationPage from './components/registration-page';
 import Portfolio from './components/portfolio';
-import TransactionWrapper from './components/transaction-wrapper';
+import Trade from './components/trade-form';
 
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
@@ -51,7 +51,7 @@ export class App extends React.Component {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={RegistrationPage} />
         <Route exact path="/portfolio" component={Portfolio} />
-        <Route exact path="/transactions" component={TransactionWrapper} />
+        {/* <Route exact path="/transactions" component={Trade} /> */}
       </div>
     );
   }
@@ -63,4 +63,5 @@ const mapStateToProps = state => ({
 });
 
 // Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
+
 export default withRouter(connect(mapStateToProps)(App));

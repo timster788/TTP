@@ -8,6 +8,8 @@ import { setAuthToken, refreshAuthToken } from './actions/auth';
 import portfolioReducer from './reducers/portfolio-reducer';
 import stockReducer from './reducers/stock-reducer';
 import transactionReducer from './reducers/transaction-reducer';
+import tradeReducer from './actions/trade'
+import holdingReducer from './actions/holding'
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
@@ -17,7 +19,9 @@ const store = createStore(
     protectedData: protectedDataReducer,
     portfolio: portfolioReducer,
     stock: stockReducer,
-    transaction: transactionReducer
+    transaction: transactionReducer,
+    trades:tradeReducer,
+    holdings:holdingReducer
   }),
   applyMiddleware(thunk)
 );

@@ -26,7 +26,21 @@ app.use(
   })
 );
 
-app.use(cors());
+
+/*======CORS Middleware=====*/
+// const corsOption = {
+//   origin: true,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true
+// };
+// app.use(cors(corsOption));
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
+
+
 
 app.use(express.json());
 

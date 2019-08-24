@@ -3,12 +3,8 @@ const mongoose = require('mongoose');
 const portfolioSchema = new mongoose.Schema({
   stock: { type: String },
   shares: { type: Number },
-  quantity: { type: Number },
-  balance: {
-    type: Number,
-    required: true,
-    default: 5000
-  },
+  
+  
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

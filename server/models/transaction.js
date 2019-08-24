@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const transactionSchema = new mongoose.Schema({
   symbol: { type: String },
   shares: { type: Number },
+  price: { type: Number },
   quantity: { type: Number },
-  balance: { type: mongoose.Schema.Types.ObjectId, ref: 'Portfolio' },
+  balance: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

@@ -27,9 +27,10 @@ router.post('/', (req, res, next) => {
     err.status = 400;
     return next(err);
   }
-  const { symbol, quantity } = req.body;
+  const { symbol, quantity, companyName } = req.body;
   const newTransaction = {
     symbol,
+    companyName,
     quantity,
     userId
   };
