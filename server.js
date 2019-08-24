@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const { PORT, MONGODB_URI, CLIENT_ORIGIN } = require('./config');
-
+const path = require('path')
 const localStrategy = require('./passport/localStrategy');
 const jwtStrategy = require('./passport/jwt');
 
@@ -75,7 +75,13 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
+app.use('/',routes)
+if(process.env.NODE_ENV='production'){
+  app.use(express.static('client/build'))
+app.get('*',(req,res)=>  {
+  res.sendFile(path.join(__dirname, 'client','build','index.html'));
+})
+}
 // function runServer(port = PORT) {
 //   const server = app
 //     .listen(port, () => {
