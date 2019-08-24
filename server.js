@@ -19,7 +19,14 @@ const jwtAuth = passport.authenticate('jwt', {
   failWithError: true
 });
 const app = express();
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
 
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
     skip: (req, res) => process.env.NODE_ENV === 'test'
