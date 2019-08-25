@@ -52,7 +52,7 @@ app.use(
 app.use(express.json());
 
 app.use('/api/users', userRouter);
-app.use('/api/holding', jwtAuth, holdingRouter);
+app.use('/api/holdings', jwtAuth, holdingRouter);
 app.use('/api/transactions', jwtAuth, transactionRouter);
 app.use('/api', authRouter);
 app.use(

@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
 
-const portfolioSchema = new mongoose.Schema({
+const holdingSchema = new mongoose.Schema({
   stock: { type: String },
   shares: { type: Number },
-  
-  
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
-portfolioSchema.set('timestamps', true);
+holdingSchema.set('timestamps', true);
 
-portfolioSchema.set('toObject', {
+holdingSchema.set('toObject', {
   virtuals: true,
   transform: (doc, result) => {
     delete result._id;
@@ -18,4 +16,4 @@ portfolioSchema.set('toObject', {
   }
 });
 
-module.exports = mongoose.model('Portfolio', portfolioSchema);
+module.exports = mongoose.model('Holding', holdingSchema);

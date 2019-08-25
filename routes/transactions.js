@@ -19,28 +19,50 @@ router.get('/', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-router.post('/', (req, res, next) => {
+router.get('/:userId',(req,res,next)=>{
+  const { id } = req.params;
+  const userId = req.user._id;
+  /***** Never trust users - validate input *****/
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    const err = new Error('The `id` is not valid');
+    err.status = 400;
+    return next(err);
+  }
+  Transaction.findOne({ _id: id, userId })
+    .then(result => {
+      if (result) {
+        res.json({
+          data: result
+        });
+      } else {
+        next();
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+router.post('/:userId', (req, res, next) => {
   const userId = req.user._id;
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     const err = new Error('The `userId` is not valid');
     err.status = 400;
     return next(err);
   }
-  const { symbol, quantity, companyName } = req.body;
+  const { symbol, quantity, shares, price, balance } = req.body;
   const newTransaction = {
     symbol,
-    companyName,
+    shares,
+    price,
     quantity,
+    balance,
     userId
   };
   Transaction.create(newTransaction)
     .then(result => {
-      console.log('result', result);
+      console.log('result',result);
 
-      res
-
-        .location(`${req.originalUrl}/${result.id}`)
+      res.location(`${req.originalUrl}/${result.id}`)
         .status(201)
         .json(result);
     })

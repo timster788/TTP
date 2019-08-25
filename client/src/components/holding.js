@@ -20,7 +20,7 @@ const styles = () => ({
 
 class Holding extends React.Component {
   componentDidMount() {
-    this.props.fetchHoldingsWithPriceByUserId(this.props);
+    this.props.fetchHoldingsWithPriceByUserId(this.props.userId);
   }
   render() {
     const { classes, holdingsWithPrice, portfolioTotal } = this.props;
@@ -56,14 +56,14 @@ class Holding extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-//   userId: state.user.id,
+  userId: state.auth.currentUser._id,
   holdingsWithPrice: state.holdings.holdingsWithPrice,
   portfolioTotal: state.holdings.portfolioTotal
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHoldingsWithPriceByUserId: () => dispatch(fetchHoldingsWithPriceByUserId())
+    fetchHoldingsWithPriceByUserId: (userId) => dispatch(fetchHoldingsWithPriceByUserId(userId))
   };
 };
 

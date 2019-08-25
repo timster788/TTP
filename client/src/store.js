@@ -10,6 +10,7 @@ import stockReducer from './reducers/stock-reducer';
 import transactionReducer from './reducers/transaction-reducer';
 import tradeReducer from './actions/trade'
 import holdingReducer from './actions/holding'
+import logger from 'redux-logger'
 
 const store = createStore(
   combineReducers({
@@ -22,7 +23,7 @@ const store = createStore(
     trades:tradeReducer,
     holdings:holdingReducer
   }),
-  applyMiddleware(thunk)
+  applyMiddleware(thunk,logger)
 );
 
 // Hydrate the authToken from localStorage if it exist

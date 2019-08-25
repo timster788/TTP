@@ -13,10 +13,10 @@ const setError = error => ({type: SET_ERROR, error});
 const setValidSymbols = validSymbolSet =>
     ({type: SET_VALID_SYMBOLS, validSymbolSet});
 
-export const fetchTradesByUserId = () => async dispatch => {
+export const fetchTradesByUserId = (userId) => async dispatch => {
   const {data} = await axios({
     method: 'GET',
-    url:`${API_BASE_URL}/transactions/`,
+    url:`${API_BASE_URL}/transactions/${userId}`,
     headers: {
       Authorization: 'Bearer ' + loadAuthToken()
     }
@@ -28,7 +28,7 @@ export const fetchAllValidSymbols = () => async dispatch => {
   const {data} =
       await axios({
         method: 'GET',
-        url:`${TRADE_DATA_BASE_URL}/ref-data/symbols`,
+        url:`${STOCK_DATA_BASE_URL}/ref-data/iex/symbols?token=${API_KEY}`,
         // headers: {
           
         //   Authorization: 'Bearer ' + loadAuthToken()
@@ -39,37 +39,30 @@ export const fetchAllValidSymbols = () => async dispatch => {
   return dispatch(setValidSymbols(validSymbolSet));
 };
 
-export const buy = function( symbol, shares) {
+export const buy = function( userId ,symbol, shares) {
   return async function(dispatch) {
     const {data} =
     await axios({
       method: 'GET',
       url:`${STOCK_DATA_BASE_URL}/stock/${symbol}/price?token=${API_KEY}`,
-      
-
-     
-    }
-    )
-    
-    
-    
+      })
     try {
       await axios({
         method: 'POST',
-        url:`${API_BASE_URL}/transactions/`,
+        url:`${API_BASE_URL}/transactions/${userId}`,
         headers: {
           Authorization: 'Bearer ' + loadAuthToken()
-        }, 
-        symbol: symbol, 
-        shares: shares,
-         price: data
+        },data:{userId: userId, 
+         symbol: symbol, 
+         shares: shares,
+         price: data}
       });
       dispatch(setError(null));
     } catch (err) {
       return dispatch(setError(err));
     }
     
-    dispatch(fetchHoldingsWithPriceByUserId());
+    dispatch(fetchHoldingsWithPriceByUserId(userId));
   };
 };
 

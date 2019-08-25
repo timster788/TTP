@@ -68,7 +68,7 @@ class Trade extends React.Component {
       return;
     }
     
-    this.props.buy(this.props,symbol,shares);
+    this.props.buy(this.props.userId,symbol,shares);
     console.log(this.props.buy,'Buy')
   }
 
@@ -113,7 +113,7 @@ class Trade extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  // userId: state.user.id,
+  userId: state.auth.currentUser._id,
   cashBal: state.auth.currentUser.cashBal,
   error: state.trades.error,
   validSymbolSet: state.trades.validSymbolSet
@@ -122,7 +122,7 @@ const mapStateToProps = (state) => ({
 const mapDispatch = dispatch => {
   return {
     fetchAllValidSymbols: () => dispatch(fetchAllValidSymbols()),
-    buy: ( symbol, shares) => dispatch(buy( symbol, shares))
+    buy: (userId,symbol,shares) => dispatch(buy(userId,symbol,shares))
   };
 };
 

@@ -9,10 +9,10 @@ const GET_HOLDINGS_WITH_PRICE = 'GET_HOLDINGS_WITH_PRICE';
 const getHoldingsWithPrice = (holdingsWithPrice, portfolioTotal) =>
     ({type: GET_HOLDINGS_WITH_PRICE, holdingsWithPrice, portfolioTotal});
 
-export const fetchHoldingsWithPriceByUserId = () => async dispatch => {
+export const fetchHoldingsWithPriceByUserId = (userId) => async dispatch => {
   const {data} = await axios({
     method: 'GET',
-    url:`${API_BASE_URL}/portfolio/`,
+    url:`${API_BASE_URL}/holdings/${userId}`,
     headers: {
       Authorization: 'Bearer ' + loadAuthToken()
     }
