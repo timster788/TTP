@@ -9,10 +9,10 @@ const GET_HOLDINGS_WITH_PRICE = 'GET_HOLDINGS_WITH_PRICE';
 const getHoldingsWithPrice = (holdingsWithPrice, portfolioTotal) =>
     ({type: GET_HOLDINGS_WITH_PRICE, holdingsWithPrice, portfolioTotal});
 
-export const fetchHoldingsWithPriceByUserId = (id) => async dispatch => {
+export const fetchHoldingsWithPriceByUserId = () => async dispatch => {
   const {data} = await axios({
     method: 'GET',
-    url:`${API_BASE_URL}/portfolio/${id}`,
+    url:`${API_BASE_URL}/portfolio/`,
     headers: {
       Authorization: 'Bearer ' + loadAuthToken()
     }
@@ -22,15 +22,17 @@ export const fetchHoldingsWithPriceByUserId = (id) => async dispatch => {
     return dispatch(getHoldingsWithPrice([], 0));
   }
 
-  const symbols = data.map(holding => holding.symbol).join(',');
+  const symbols = data.map(holdings => holdings.symbol).join(',');
 
   const iexRets = await axios({
     method: 'GET',
-    url:`${TRADE_DATA_BASE_URL}/stock/market/batch?symbols=${
-        symbols}&types=price,ohlc`,
-    headers: {
-      Authorization: 'Bearer ' + loadAuthToken()
-    }
+    url: `${STOCK_DATA_BASE_URL}/stock/symbols=${symbols}/ohlc?token=${API_KEY}`,
+    // headers: {
+    //   Authorization: 'Bearer ' + loadAuthToken()
+    // }
+    // ${TRADE_DATA_BASE_URL}/stock/market/batch?symbols=${
+    //   symbols}&types=price,ohlc`,
+
   });
   const iexInfo = iexRets.data;
 

@@ -29,11 +29,11 @@ export const fetchAllValidSymbols = () => async dispatch => {
       await axios({
         method: 'GET',
         url:`${TRADE_DATA_BASE_URL}/ref-data/symbols`,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          Authorization: 'Bearer ' + loadAuthToken()
+        // headers: {
           
-        }
+        //   Authorization: 'Bearer ' + loadAuthToken()
+          
+        // }
       });
   const validSymbolSet = new Set(data.map(stock => stock.symbol));
   return dispatch(setValidSymbols(validSymbolSet));
@@ -44,18 +44,23 @@ export const buy = function( symbol, shares) {
     const {data} =
     await axios({
       method: 'GET',
-      url:`${TRADE_DATA_BASE_URL}/stock/${symbol}/price`,
-      headers: {
-        Authorization: 'Bearer ' + loadAuthToken()
-      }
-    });
+      url:`${STOCK_DATA_BASE_URL}/stock/${symbol}/price?token=${API_KEY}`,
+      
+
+     
+    }
+    )
+    
+    
+    
     try {
       await axios({
         method: 'POST',
         url:`${API_BASE_URL}/transactions/`,
         headers: {
           Authorization: 'Bearer ' + loadAuthToken()
-        }, symbol: symbol, 
+        }, 
+        symbol: symbol, 
         shares: shares,
          price: data
       });

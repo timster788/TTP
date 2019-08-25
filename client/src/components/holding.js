@@ -20,7 +20,7 @@ const styles = () => ({
 
 class Holding extends React.Component {
   componentDidMount() {
-    this.props.fetchHoldingsWithPriceByUserId(this.props.userId);
+    this.props.fetchHoldingsWithPriceByUserId(this.props);
   }
   render() {
     const { classes, holdingsWithPrice, portfolioTotal } = this.props;

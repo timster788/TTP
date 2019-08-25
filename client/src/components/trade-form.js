@@ -48,12 +48,16 @@ class Trade extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     const symbol = this.state.symbol;
+    console.log(this.state.symbol,'STATE')
     const { validSymbolSet } = this.props;
+    console.log(symbol,'symbol')
     if (!validSymbolSet.has(symbol)) {
       this.setState({
         symbolErr: 'Ticker Symbol Not Valid!',
         symbol: this.state.symbol
       });
+      console.log(symbol,'symbol2')
+
       return;
     }
     const shares = Number(this.state.qty);
@@ -63,7 +67,9 @@ class Trade extends React.Component {
       });
       return;
     }
-    this.props.buy(this.props, symbol, shares);
+    
+    this.props.buy(this.props,symbol,shares);
+    console.log(this.props.buy,'Buy')
   }
 
   render() {
