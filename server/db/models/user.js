@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const bycrypt = require('bycrptjs');
+const crypto = require('crypto');
 const db = require('../db');
 
 const User = db.define('user', {
@@ -27,9 +27,8 @@ const User = db.define('user', {
 });
 
 
-User.prototype.validatePassword = function(pwd) {
-    const currentUser =this;
-  return bycrypt.compare(pwd,currentUser.password)
+User.prototype.correctPassword = function(candidatePwd) {
+  return User.encryptPassword(candidatePwd, this.salt()) === this.password();
 };
 
 User.generateSalt = function() {
@@ -38,9 +37,9 @@ User.generateSalt = function() {
 
 User.encryptPassword = function(plainText, salt) {
   return crypto.createHash('RSA-SHA256')
-      .update(plainText)
-      .update(salt)
-      .digest('hex');
+    .update(plainText)
+    .update(salt)
+    .digest('hex');
 };
 
 const setSaltAndPassword = user => {
