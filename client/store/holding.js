@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {  STOCK_DATA_BASE_URL, API_KEY } from '../config';
 const GET_HOLDINGS_WITH_PRICE = 'GET_HOLDINGS_WITH_PRICE';
 
 const getHoldingsWithPrice = (holdingsWithPrice, portfolioTotal) =>
@@ -14,9 +14,7 @@ export const fetchHoldingsWithPriceByUserId = (userId) => async dispatch => {
 
   const symbols = data.map(holding => holding.symbol).join(',');
 
-  const iexRets = await axios.get(
-      `https://api.iextrading.com/1.0/stock/market/batch?symbols=${
-          symbols}&types=price,ohlc`);
+  const iexRets = await axios.get(`${STOCK_DATA_BASE_URL}/stock/symbols=${symbols}/ohlc?token=${API_KEY}`);
   const iexInfo = iexRets.data;
 
   

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {STOCK_DATA_BASE_URL, API_KEY} from '../config'
 import {fetchHoldingsWithPriceByUserId} from './holding';
 import {me} from './user';
 const GET_TRADES = 'GET_TRADES';
@@ -17,7 +18,7 @@ export const fetchTradesByUserId = (userId) => async dispatch => {
 
 export const fetchAllValidSymbols = () => async dispatch => {
   const {data} =
-      await axios.get('https://api.iextrading.com/1.0/ref-data/symbols');
+      await axios.get(`${STOCK_DATA_BASE_URL}/ref-data/iex/symbols?token=${API_KEY}`);
   const validSymbolSet = new Set(data.map(stock => stock.symbol));
   return dispatch(setValidSymbols(validSymbolSet));
 };
@@ -25,7 +26,7 @@ export const fetchAllValidSymbols = () => async dispatch => {
 export const buy = function(userId, symbol, shares) {
   return async function(dispatch) {
     const {data} =
-        await axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/price`);
+        await axios.get(`${STOCK_DATA_BASE_URL}/stock/${symbol}/price?token=${API_KEY}`);
     try {
       await axios.post(
           `/api/trades/user/${userId}`,
