@@ -6,8 +6,9 @@ import requiresLogin from './requires-login';
 import Trade from './trade-form';
 import HeaderBar from './header-bar'
 import Holding from './holding'
-class Portfolio extends React.Component {
 
+class Portfolio extends React.Component {
+  
   render() {
     return (<div><HeaderBar></HeaderBar><Holding></Holding> Portfolio
     <Trade></Trade>
@@ -24,7 +25,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default requiresLogin()(connect(mapStateToProps)(Portfolio));
+export default requiresLogin()
+(connect(mapStateToProps)(Portfolio));
 
 
 

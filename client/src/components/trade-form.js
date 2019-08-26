@@ -2,7 +2,7 @@ import { TextField } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
 import { buy, fetchAllValidSymbols } from '../actions/trade';
- import requiresLogin from './requires-login';
+
 
 class Trade extends React.Component {
   constructor() {

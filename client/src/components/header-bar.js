@@ -19,7 +19,7 @@ export class HeaderBar extends React.Component {
         <nav>
         <div className="header-links">
           <Link to='/portfolio'>Portfolio</Link>
-          <Link to='/transactions'>Transaction</Link>
+          <Link to='/transaction'>Transaction</Link>
           <button className="logout" onClick={() => this.logOut()}>Log out</button>
           </div>
         </nav>

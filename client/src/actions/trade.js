@@ -16,9 +16,10 @@ const setValidSymbols = validSymbolSet =>
 export const fetchTradesByUserId = (userId) => async dispatch => {
   const {data} = await axios({
     method: 'GET',
-    url:`${API_BASE_URL}/transactions/${userId}`,
+    url:`${API_BASE_URL}/trades/${userId}`,
     headers: {
-      Authorization: 'Bearer ' + loadAuthToken()
+      Authorization: 'Bearer ' + loadAuthToken(),
+        
     }
   });
   return dispatch(getTrades(data));
@@ -29,11 +30,7 @@ export const fetchAllValidSymbols = () => async dispatch => {
       await axios({
         method: 'GET',
         url:`${STOCK_DATA_BASE_URL}/ref-data/iex/symbols?token=${API_KEY}`,
-        // headers: {
-          
-        //   Authorization: 'Bearer ' + loadAuthToken()
-          
-        // }
+      
       });
   const validSymbolSet = new Set(data.map(stock => stock.symbol));
   return dispatch(setValidSymbols(validSymbolSet));
@@ -49,7 +46,7 @@ export const buy = function( userId ,symbol, shares) {
     try {
       await axios({
         method: 'POST',
-        url:`${API_BASE_URL}/transactions/${userId}`,
+        url:`${API_BASE_URL}/trades/${userId}`,
         headers: {
           Authorization: 'Bearer ' + loadAuthToken()
         },data:{userId: userId, 

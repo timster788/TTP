@@ -5,10 +5,10 @@ import LandingPage from './components/landing-page';
 import LoginPage from './components/login-page';
 import RegistrationPage from './components/registration-page';
 import Portfolio from './components/portfolio';
-import Trade from './components/trade-form';
+import Transaction from './components/transactions';
 
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Dashboard from './components/dashboard';
 import { refreshAuthToken } from '../src/actions/auth';
@@ -50,8 +50,10 @@ export class App extends React.Component {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={RegistrationPage} />
+        
         <Route exact path="/portfolio" component={Portfolio} />
-        {/* <Route exact path="/transactions" component={Trade} /> */}
+        <Route  exact path="/transaction" component={Transaction} />
+      
       </div>
     );
   }
