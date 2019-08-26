@@ -14,7 +14,7 @@ export const fetchHoldingsWithPriceByUserId = (userId) => async dispatch => {
 
   const symbols = data.map(holding => holding.symbol).join(',');
 
-  const iexRets = await axios.get(`${STOCK_DATA_BASE_URL}/stock/symbols=${symbols}/ohlc?token=${API_KEY}`);
+  const iexRets = await axios.get(`${STOCK_DATA_BASE_URL}/stock/market/batch?types=previous,price&symbols=${symbols}&token=${API_KEY}`);
   const iexInfo = iexRets.data;
 
   
@@ -22,12 +22,13 @@ export const fetchHoldingsWithPriceByUserId = (userId) => async dispatch => {
   let portfolioTotal = 0;
   for (let i = 0; i < data.length; ++i) {
     const symbol = data[i].symbol;
+    console.log(iexInfo,'data')
     combined.push({
       symbol: symbol,
       shares: data[i].shares,
       price: iexInfo[symbol].price,
-      open: iexInfo[symbol].ohlc.open.price,
-      change: iexInfo[symbol].price - iexInfo[symbol].ohlc.open.price
+      open: iexInfo[symbol].previous.open.price,
+      change: iexInfo[symbol].price - iexInfo[symbol].previous.open.price
     });
     portfolioTotal += data[i].shares * iexInfo[symbol].price;
   }
