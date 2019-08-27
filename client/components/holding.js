@@ -28,7 +28,7 @@ class Holding extends React.Component {
         <h2 id="portfolio-total">Portfolio: ${portfolioTotal.toFixed(2)}</h2>
         {holdingsWithPrice.map((holding) => {
           let color = classes.grey;
-          if (holding.change > 0) {
+          if (holding.change > -1) {
             color = classes.green;
           }
           if (holding.change < 0) {
