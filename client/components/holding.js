@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchHoldingsWithPriceByUserId } from '../store/holding';
 
-
 const styles = () => ({
   grey: {
     color: '#808080'
@@ -29,26 +28,29 @@ class Holding extends React.Component {
         <h2 id="portfolio-total">Portfolio: ${portfolioTotal.toFixed(2)}</h2>
         {holdingsWithPrice.map((holding) => {
           let color = classes.grey;
-          if (holding.change > 0) { color = classes.green; }
-          if (holding.change < 0) { color = classes.red; }
+          if (holding.change > 0) {
+            color = classes.green;
+          }
+          if (holding.change < 0) {
+            color = classes.red;
+          }
           return (
             <div key={holding.symbol} className="holding-list">
               <List>
                 <ListItem>
-                  <ListItemText >{holding.symbol} ... {holding.shares} shares</ListItemText >
-                  <ListItemText classes={{ primary: `${color}` }} >${holding.price}{holding.change === 0 ? (
-                    <ArrowForward />
-                  ) : holding.change > 0 ? (
-                    <ArrowUpward />
-                  ) : (
-                    <ArrowDownward />
-                  )}</ListItemText >
+                  <ListItemText>
+                    {holding.symbol} ... {holding.shares} shares
+                  </ListItemText>
+                  <ListItemText classes={{ primary: `${color}` }}>
+										${holding.price}
+                    {holding.change === 0 ? <ArrowForward /> : holding.change > 0 ? <ArrowUpward /> : <ArrowDownward />}
+                  </ListItemText>
                 </ListItem>
               </List>
               <Divider />
-            </div>);
-        })
-        }
+            </div>
+          );
+        })}
         <p id="api-ref">* Data provided by IEX</p>
       </div>
     );
@@ -61,7 +63,7 @@ const mapStateToProps = (state) => ({
   portfolioTotal: state.holdings.portfolioTotal
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     fetchHoldingsWithPriceByUserId: (userId) => dispatch(fetchHoldingsWithPriceByUserId(userId))
   };
