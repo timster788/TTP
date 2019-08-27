@@ -51,7 +51,7 @@ class Holding extends React.Component {
             </div>
           );
         })}
-        <p id="api-ref">* Data provided by IEX</p>
+        <p id="api-ref"> </p>
       </div>
     );
   }
