@@ -34,11 +34,12 @@ body {
 }
 
 .header-links > * {
-	display: flex;
+	/* display: flex; */
 	color: royalblue;
 	font-weight: 600;
 	margin-left: 20px;
 	text-decoration: none;
+	/* flex-direction: row; */
 }
 
 .portfolio-main {
