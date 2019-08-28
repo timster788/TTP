@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../store/user';
+import { Link } from 'react-router-dom';
 
 const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props;
@@ -9,6 +10,7 @@ const AuthForm = props => {
     <div className="form-container">
       <form onSubmit={handleSubmit} name={name} className="form">
         {name === 'signup' ? (<div>
+          
           <label htmlFor="username">
             <small>Name</small>
           </label>
@@ -18,13 +20,13 @@ const AuthForm = props => {
           <label htmlFor="email">
             <small>Email</small>
           </label>
-          <input name="email" type="text" className="input" />
+          <input name="email" type="text" className="input" placeholder="email@email.com"/>
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" className="input" />
+          <input name="password" type="password" className="input" placeholder="password"  />
         </div>
         <div>
           <button type="submit" className="submit-button">{displayName}</button>

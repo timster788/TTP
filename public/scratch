@@ -1,0 +1,45 @@
+@media screen and (max-width: 575px) {
+	.header {
+		flex-direction: row;
+	}
+	.header-links {
+		flex-direction: row; /* Change this to 'column' to stack the links */
+		margin-bottom: 1em;
+	}
+}
+@media screen and (max-width: 320px) {
+	.header {
+		flex-direction: column;
+	}
+	.portfolio-main {
+		flex-direction: column;
+	}
+	#portfolio-total {
+		padding-top: 100px;
+		padding-left: 50px;
+	}
+	.header-links {
+		flex-direction: row; /* Change this to 'column' to stack the links */
+		margin-bottom: 1em;
+	}
+}
+
+
+@media screen and (mi-width: 320px) {
+	.header {
+		width: 100%;
+		background-color: skyblue;
+		padding: 10px;
+		height: 120px;
+		display: block;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+	}
+	.header-links > * {
+		color: royalblue;
+		font-weight: 600;
+		margin-left: 20px;
+		text-decoration: none;
+	}
+}
